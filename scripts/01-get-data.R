@@ -11,8 +11,7 @@ if(!dir_exists(h("data"))) {
   dir_create(h("data"))
 }
 
-blm_sheet <- gs_url("https://docs.google.com/spreadsheets/d/10v26bzYoWO7bBHpToV3dihWDhxyWKruTZO9nf1fmsCQ",
-                    lookup=FALSE)
+blm_sheet <- gs_url("https://docs.google.com/spreadsheets/d/10v26bzYoWO7bBHpToV3dihWDhxyWKruTZO9nf1fmsCQ")
 
 blm_groups <- gs_read(blm_sheet, ws = "BLM-related groups")
 
@@ -23,7 +22,7 @@ blm_handles <- blm_groups %>%
   pull("Web address") %>%
   stri_replace_all_fixed("@", "")
 
-blm_users <- rtweet::lookup_users(blm_handles)
+blm_users <- lookup_users(blm_handles)
 
 write_csv(h("data", "blm_users.csv"))
 
